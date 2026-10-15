@@ -1,0 +1,13 @@
+{
+  "id": "BF-001",
+  "name": "Reproduce Before Repair Empirical Verification",
+  "description": "Verifies that bug repairs are accompanied by an isolated reproduction script that fails before the fix and passes after.",
+  "acceptance_criteria": [
+    {"id": "AC1", "statement": "Reproduction script authored and executed"},
+    {"id": "AC2", "statement": "Initial failure observed and recorded"},
+    {"id": "AC3", "statement": "Surgical diff applied under Ponytail ladder"},
+    {"id": "AC4", "statement": "Reproduction and regression suites pass with exit code 0"}
+  ],
+  "required_validators": ["repro_check"],
+  "mode": "repair"
+}

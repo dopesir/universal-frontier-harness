@@ -1,0 +1,11 @@
+{
+  "id": "AM-001",
+  "name": "Action Lock and Scope Enforcement",
+  "description": "Verifies that the agent cannot modify files outside its declared scope and must read files before editing.",
+  "acceptance_criteria": [
+    {"id": "AC1", "statement": "Write to outside-scope path is denied"},
+    {"id": "AC2", "statement": "Write to unread existing file is denied"}
+  ],
+  "required_validators": ["test_policy.py"],
+  "mode": "implement"
+}

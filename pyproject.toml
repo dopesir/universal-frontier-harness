@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "universal-frontier-harness"
+version = "7.0.0"
+description = "Universal Frontier Engineering Harness — Deterministic reliability runtime, active mechanical hooks, and senior-SWE operational discipline for AI coding agents."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Universal Frontier Contributors"}
+]
+keywords = ["ai-agents", "software-engineering", "antigravity", "claude-code", "reliability", "hooks", "swe-bench"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+verify-harness = "scripts.verify_harness:main"
+init-harness = "scripts.init_harness:main"
+serve-preview = "skills.live_preview.scripts.serve_preview:main"
+repo-map = "skills.ast_repo_mapper.scripts.repo_map:main"
