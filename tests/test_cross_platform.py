@@ -27,10 +27,12 @@ def calculate_π():
             Path(f_path).unlink(missing_ok=True)
 
     def test_pathlib_posix_windows_normalization(self):
-        # Check that mixed separators resolve cleanly
-        p1 = Path("src/core/test.py")
-        p2 = Path(r"src\core\test.py")
-        self.assertEqual(p1.parts, p2.parts)
+        # PureWindowsPath reliably parses backslashes across Linux, macOS, and Windows
+        from pathlib import PureWindowsPath
+        p_win = PureWindowsPath(r"src\core\test.py")
+        p_posix = Path("src/core/test.py")
+        self.assertEqual(p_win.parts, p_posix.parts)
+        self.assertEqual(p_win.as_posix(), "src/core/test.py")
 
 
 if __name__ == "__main__":
