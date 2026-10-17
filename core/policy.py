@@ -68,6 +68,8 @@ def evaluate_action(
     reads: set[str] | None = None,
     failed_fingerprints: set[str] | None = None,
     fingerprint: str = "",
+    check_blast_radius: bool = False,
+    root_dir: str | Path | None = None,
 ) -> tuple[str, str]:
     """Evaluates an action against deterministic safety invariants."""
     reads = reads or set()
@@ -107,5 +109,15 @@ def evaluate_action(
         if not matched:
             scope_str = ", ".join(allowed_scope)
             return "deny", f"Scope fencing violation: target '{action.paths[0]}' is outside allowed write scope: [{scope_str}]."
+
+    # 5. Strict blast-radius check (when mode requires or check_blast_radius requested)
+    if action.kind == "write" and action.paths and (mode in ("strict-graph", "strict-blast-radius") or check_blast_radius):
+        try:
+            from core.graph_intel import check_blast_radius_safety
+            is_safe, advisory = check_blast_radius_safety(action.paths[0], inspected_paths=reads, root_dir=root_dir)
+            if not is_safe and advisory:
+                return "deny", f"Blast radius gate violation: {advisory}"
+        except Exception:
+            pass
 
     return "allow", "Action conforms to active policy."

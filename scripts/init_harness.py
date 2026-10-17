@@ -314,6 +314,7 @@ def init_project(
             agents_dir / "core" / "contract.py",
             agents_dir / "core" / "evidence.py",
             agents_dir / "core" / "fast_lint.py",
+            agents_dir / "core" / "graph_intel.py",
             agents_dir / "core" / "policy.py",
             agents_dir / "core" / "stop_gate.py",
         ]

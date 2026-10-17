@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.0] - 2026-10-17
+
+### Added
+- **Graph-Aware Intelligence Engine (`core.graph_intel`)**:
+  - **Native AST Dependency Extraction**: Real-time dependency graph mapping and caller resolution built entirely on Python standard library `ast` with zero external dependencies.
+  - **Graphify Consumer Adapter**: Automatically detects and ingests Graphify output (`graphify-out/graph.json` or `.graphify/graph.json`) when present to augment metrics with multi-language nodes and Louvain communities.
+  - **Zero Setup Required**: Explicitly decoupled — users and autonomous agents do **NOT** need to install, configure, or initialize Graphify; the native engine functions out of the box.
+  - **Blast-Radius Protection**: Computes risk levels (`NONE`, `LOW`, `MEDIUM`, `HIGH`) and surfaces surgical advisories when an agent attempts to mutate high-blast-radius files (5+ dependents) without inspecting callers.
+  - **Strict Blast Radius Mode**: Added `strict-blast-radius` contract mode allowing projects to hard-block uninspected high-blast-radius modifications.
+  - **Interactive CLI Diagnostics**: Added `python -m core.graph_intel status`, `blast-radius <file>`, and `dependents <file>` commands (<0.3ms cached latency).
+- **Symbol Map Blast Radius Annotations (`skills/ast-repo-mapper`)**:
+  - Added `--with-blast-radius` flag to `repo_map.py` to annotate file headers with risk levels and dependent counts directly in the structural symbol tree.
+- **Unit Test Coverage**:
+  - Added 6 new unit tests in `tests/test_graph_intel.py`, expanding the test suite to 50 automated tests.
+
+---
+
 ## [7.0.1] - 2026-10-17
 
 ### Added

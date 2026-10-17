@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "universal-frontier-harness"
-version = "7.0.1"
+version = "7.1.0"
 description = "Universal Frontier Engineering Harness — Deterministic reliability runtime, active mechanical hooks, and senior-SWE operational discipline for AI coding agents."
 readme = "README.md"
 license = {text = "MIT"}

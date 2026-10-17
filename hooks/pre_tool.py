@@ -128,6 +128,18 @@ def main():
     result = {"decision": decision}
     if decision != "allow":
         result["reason"] = reason
+    elif action.kind == "write" and action.paths:
+        try:
+            from core.graph_intel import check_blast_radius_safety
+            is_safe, advisory = check_blast_radius_safety(action.paths[0], inspected_paths=reads, root_dir=root)
+            if not is_safe and advisory:
+                if mode in ("strict-graph", "strict-blast-radius"):
+                    result["decision"] = "deny"
+                    result["reason"] = advisory
+                else:
+                    result["advisory"] = advisory
+        except Exception:
+            pass
 
     print(json.dumps(result))
 

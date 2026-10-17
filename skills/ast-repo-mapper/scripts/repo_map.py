@@ -67,10 +67,21 @@ def parse_js_ts_symbols(path: Path) -> list[str]:
     return symbols
 
 
-def generate_repo_map(root_dir: str | Path, max_files: int = 50) -> str:
+def generate_repo_map(root_dir: str | Path, max_files: int = 50, include_blast_radius: bool = False) -> str:
     root = Path(root_dir).resolve()
     lines = [f"# Symbol Map: {root.name}"]
     count = 0
+
+    graph = None
+    if include_blast_radius:
+        try:
+            for cand in [root, root.parent, Path(__file__).resolve().parent.parent.parent.parent]:
+                if (cand / "core").is_dir() and str(cand) not in sys.path:
+                    sys.path.insert(0, str(cand))
+            from core.graph_intel import get_dependency_graph
+            graph = get_dependency_graph(root)
+        except Exception:
+            pass
 
     for dirpath, dirnames, filenames in os.walk(root):
         dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
@@ -88,7 +99,12 @@ def generate_repo_map(root_dir: str | Path, max_files: int = 50) -> str:
                 symbols = parse_js_ts_symbols(p)
 
             if symbols:
-                lines.append(f"\n{rel_path}:")
+                header = f"\n{rel_path}:"
+                if graph:
+                    br = graph.compute_blast_radius(str(rel_path).replace("\\", "/"))
+                    if br.score > 0:
+                        header = f"\n{rel_path} [Blast Radius: {br.level} ({br.score} dep{'s' if br.score > 1 else ''})]:"
+                lines.append(header)
                 lines.extend(symbols)
                 count += 1
                 if count >= max_files:
@@ -99,5 +115,8 @@ def generate_repo_map(root_dir: str | Path, max_files: int = 50) -> str:
 
 
 if __name__ == "__main__":
-    target = sys.argv[1] if len(sys.argv) > 1 else "."
-    print(generate_repo_map(target))
+    args = sys.argv[1:]
+    with_br = "--with-blast-radius" in args or "--blast-radius" in args
+    filtered_args = [a for a in args if not a.startswith("--")]
+    target = filtered_args[0] if filtered_args else "."
+    print(generate_repo_map(target, include_blast_radius=with_br))

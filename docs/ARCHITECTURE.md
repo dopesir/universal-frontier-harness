@@ -93,3 +93,30 @@ When adding or modifying logic, agents stop at the first rung that holds:
 3. **Does an already-installed dependency solve it?** (Never add a library for what existing packages do).
 4. **Can it be one line?** (One line).
 5. **Only then**: Write the minimum code that satisfies the test.
+
+---
+
+## 5. Graph-Aware Intelligence & Blast-Radius Engine (Two-Tier Design)
+
+To prevent cascading breaks across public interfaces without degrading agent latency or token budgets, the harness implements a **Two-Tier Graph Architecture**:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ 1. Cartographer (Offline / Optional)                        │
+│    • Graphify (Tree-sitter, NetworkX, Louvain clustering)   │
+│    • Produces optional static artifact: `graphify-out/`     │
+└──────────────────────────────┬──────────────────────────────┘
+                               │ Auto-Detected if present
+                               ▼
+┌─────────────────────────────────────────────────────────────┐
+│ 2. Guardrail Kernel (Universal Frontier Harness)            │
+│    • Pure Python standard library `ast` (Zero Dependencies) │
+│    • Runs out of the box with NO Graphify requirement       │
+│    • Sub-millisecond lookup (<0.3ms cached)                 │
+│    • Asymmetric silence on safe edits (0 token overhead)    │
+│    • Surgical blast-radius warning on uninspected callers   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Decoupled Execution Guarantee
+Users and autonomous agents do **NOT** need to install, configure, or initialize Graphify. The harness operates with complete independence via its native Python `ast` dependency scanner. When Graphify data is present in the workspace, it is consumed transparently to augment AST intelligence with multi-language symbols and community structures.

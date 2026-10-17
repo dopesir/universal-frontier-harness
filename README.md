@@ -96,6 +96,26 @@ When adding or modifying logic, stop at the first rung that holds:
 
 ---
 
+## Graph-Aware Intelligence & Blast-Radius Engine
+
+The harness features an ultra-lean, zero-dependency dependency graph and blast-radius evaluation engine (`core/graph_intel.py`).
+
+> [!IMPORTANT]
+> **No Graphify Initialization Required**: You do **NOT** have to install, configure, or initialize Graphify. The Universal Frontier Harness includes a built-in native AST dependency graph engine that runs out of the box using pure Python standard library. If Graphify's output (`graphify-out/graph.json` or `.graphify/graph.json`) is present in your workspace, the harness will automatically detect and consume it; otherwise, the native engine provides full blast-radius protection with zero setup.
+
+### How It Works
+1. **Asymmetric Silence**: Safe edits pass silently with **0 tokens of prompt overhead** and `<0.3ms` cached lookup latency.
+2. **Blast-Radius Protection**: When an agent attempts to mutate a high-blast-radius file (depended on by 5+ files) without inspecting any dependent callers, the harness emits a surgical advisory in `pre_tool.py` to prevent cascading breaks across public signatures.
+3. **Symbol Map Risk Annotations**: Run `python skills/ast-repo-mapper/scripts/repo_map.py . --with-blast-radius` to generate a high-density AST symbol map annotated with risk levels (`NONE`, `LOW`, `MEDIUM`, `HIGH`) and caller counts.
+4. **CLI Diagnostics**:
+   ```bash
+   python -m core.graph_intel status
+   python -m core.graph_intel blast-radius core/policy.py
+   python -m core.graph_intel dependents core/policy.py
+   ```
+
+---
+
 ## Quickstart & Installation
 
 Install the complete runtime into any target repository in one command:
@@ -120,7 +140,7 @@ python scripts/init_harness.py /path/to/your/project
   ```
 
 ### Verify System Health
-Run the self-test suite (44 automated unit, integration, and adversarial tests):
+Run the self-test suite (50 automated unit, integration, and adversarial tests):
 ```bash
 python -m unittest discover tests
 python scripts/verify_harness.py

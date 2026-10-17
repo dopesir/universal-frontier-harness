@@ -77,6 +77,7 @@ def main():
         "core/contract.py",
         "core/evidence.py",
         "core/fast_lint.py",
+        "core/graph_intel.py",
         "core/policy.py",
         "core/state_machine.py",
         "core/stop_gate.py",
