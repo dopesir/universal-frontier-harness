@@ -29,3 +29,7 @@ dependencies = []
 [project.scripts]
 verify-harness = "scripts.verify_harness:main"
 init-harness = "scripts.init_harness:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["core*", "scripts*", "skills*", "hooks*", "adapters*"]
