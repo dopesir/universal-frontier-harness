@@ -1,6 +1,6 @@
-# GITHUB RELEASE CHECKLIST — Universal Frontier Harness (v7.0.1)
+# GITHUB RELEASE CHECKLIST — Universal Frontier Harness (v7.1.0)
 
-**Release Target**: v7.0.1 (Hardening & Open-Source Production Readiness)  
+**Release Target**: v7.1.0 (Graph-Aware Dependency Intelligence & Blast-Radius Engine)  
 **Status**: PREPARED & VALIDATED LOCALLY — Awaiting Maintainer Approval to Tag and Push  
 
 ---

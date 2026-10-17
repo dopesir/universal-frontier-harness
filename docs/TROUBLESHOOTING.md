@@ -64,3 +64,22 @@ Delete or fix the corrupted contract file:
 rm .agents/sessions/<id>/contract.json
 ```
 Re-initialize the task contract using `core.contract.save_contract` or start a fresh session.
+
+---
+
+## 5. "BLAST RADIUS WARNING: Target is imported by X files but none have been inspected"
+
+### Cause
+The agent attempted to mutate a file with a high blast radius (5 or more dependent callers) without inspecting any of the caller files in the active session. This warning exists to prevent the agent from inadvertently breaking callers or modifying public function signatures without realizing who depends on them.
+
+### Resolution
+1. **Inspect Caller Contracts**: View at least one of the caller files to understand how the target's public API is consumed:
+   ```bash
+   view_file [path/to/caller.py]
+   ```
+2. **Preserve Public Signatures**: Ensure function names, arguments, return types, and exceptions remain backward-compatible (Invariant 6).
+3. **Check Blast Radius On Demand**:
+   ```bash
+   python -m core.graph_intel blast-radius [path/to/file.py]
+   ```
+*Note*: You do not need to install or run Graphify. The harness provides this intelligence out of the box with zero external dependencies.

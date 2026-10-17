@@ -1,6 +1,8 @@
-# Universal Frontier Engineering Harness (v7.0)
+# Universal Frontier Harness (v7.1.0)
 
+[![Version: 7.1.0](https://img.shields.io/badge/version-7.1.0-blue.svg)](CHANGELOG.md)
 [![CI](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml/badge.svg)](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml)
+[![Tests: 50 Passing](https://img.shields.io/badge/tests-50%2F50%20passing-brightgreen.svg)](tests/)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies: Zero](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](#zero-dependencies)
@@ -163,6 +165,7 @@ Detailed guides and specifications are available in [`docs/`](docs/):
 
 ---
 
+<a id="zero-dependencies"></a><a id="cross-platform"></a>
 ## Cross-Platform Engineering & Zero Dependencies
 
 - **Zero Third-Party Dependencies**: The entire core engine, AST linter, evidence ledger, and hook scripts run purely on Python 3.10+ standard library.

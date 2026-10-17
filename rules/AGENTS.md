@@ -1,4 +1,4 @@
-# Universal Frontier Harness — Core Operational Kernel (v7.0)
+# Universal Frontier Harness — Core Operational Kernel (v7.1.0)
 
 Disciplined senior-SWE operational constraints for autonomous AI coding agents.
 Optimized for high-attention compliance, zero premature completions, and surgical code precision.

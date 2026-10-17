@@ -33,6 +33,7 @@ your-project/
 │   │   ├── contract.py        # Task contract & acceptance criteria manager
 │   │   ├── evidence.py        # Append-only cryptographic evidence ledger
 │   │   ├── fast_lint.py       # Sub-15ms AST syntax & delimiter validator
+│   │   ├── graph_intel.py     # Zero-dependency dependency graph & blast radius engine
 │   │   ├── policy.py          # Action gatekeeper (read-before-write, scope fencing)
 │   │   ├── state_machine.py   # Task lifecycle finite state machine (FSM)
 │   │   ├── stop_gate.py       # Completion gatekeeper
