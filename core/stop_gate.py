@@ -71,7 +71,14 @@ def evaluate_stop(session_dir: str | Path, cycle_count: int = 0) -> dict[str, An
         # No session initialized; allow completion
         return {"decision": "allow"}
 
-    contract = load_contract(s_dir)
+    try:
+        contract = load_contract(s_dir)
+    except ValueError as e:
+        return {
+            "decision": "continue",
+            "reason": f"Completion blocked: Contract enforcement failure ({e}). Contract file is corrupted. Repair contract before completing.",
+        }
+
     if not contract:
         # No contract active; allow completion
         return {"decision": "allow"}
@@ -86,6 +93,7 @@ def evaluate_stop(session_dir: str | Path, cycle_count: int = 0) -> dict[str, An
     evidence = load_evidence(s_dir)
     failures = load_failures(s_dir)
     latest_mutation = get_latest_mutation_time(s_dir)
+    task_id = contract.get("task_id", "")
 
     # 1. Acceptance Criteria Verification
     criteria = contract.get("acceptance_criteria", [])
@@ -95,9 +103,11 @@ def evaluate_stop(session_dir: str | Path, cycle_count: int = 0) -> dict[str, An
         c_id = crit.get("id", f"AC{idx}") if isinstance(crit, dict) else str(crit)
         c_stmt = crit.get("statement", c_id) if isinstance(crit, dict) else str(crit)
 
-        # Look for fresh passing evidence for this criterion
+        # Look for fresh passing evidence for this criterion and task
         has_pass = any(
-            entry.get("criterion_id") == c_id and owned_validator_pass(entry) and is_fresh(entry, latest_mutation)
+            entry.get("criterion_id") == c_id
+            and owned_validator_pass(entry, task_id=task_id)
+            and is_fresh(entry, latest_mutation)
             for entry in evidence
         )
         if not has_pass:
@@ -116,7 +126,9 @@ def evaluate_stop(session_dir: str | Path, cycle_count: int = 0) -> dict[str, An
 
     for val_id in required_validators:
         has_val_pass = any(
-            entry.get("validator_id") == val_id and owned_validator_pass(entry) and is_fresh(entry, latest_mutation)
+            entry.get("validator_id") == val_id
+            and owned_validator_pass(entry, task_id=task_id)
+            and is_fresh(entry, latest_mutation)
             for entry in evidence
         )
         if not has_val_pass:

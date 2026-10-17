@@ -1,27 +1,58 @@
 # Contributing to Universal Frontier Harness
 
-We welcome contributions from the community to make AI coding agents more reliable, disciplined, and safe.
+Thank you for your interest in contributing to the Universal Frontier Harness. We welcome contributions that make autonomous coding agents safer, more verifiable, and disciplined.
+
+---
 
 ## Development Setup
 
-1. Clone the repository:
+1. **Clone the repository**:
    ```bash
-   git clone https://github.com/universal-frontier/universal-frontier-harness.git
+   git clone https://github.com/dopesir/universal-frontier-harness.git
    cd universal-frontier-harness
    ```
 
-2. Run the test suite:
+2. **Verify prerequisites**:
+   - Python 3.10, 3.11, 3.12, or 3.13.
+   - Zero external packages required (uses pure Python standard library).
+
+3. **Run the complete test suite (44 tests)**:
    ```bash
    python -m unittest discover tests
    ```
 
-3. Run the system integrity verifier:
+4. **Run the full system integrity verifier**:
    ```bash
    python scripts/verify_harness.py
    ```
 
-## Contribution Principles
+---
 
-- **Zero Heavy Dependencies**: Core modules and hooks must rely exclusively on Python 3.10+ standard library.
-- **Cross-Platform First**: All file operations must explicitly specify `encoding="utf-8"` and use `pathlib.Path` for platform neutrality.
-- **Evidence-Backed PRs**: Every PR introducing or changing logic must include automated unit tests that pass with exit code 0.
+## Core Contribution Invariants
+
+Every pull request must strictly comply with these engineering rules:
+
+1. **Zero External Runtime Dependencies**:
+   - Core runtime modules (`core/`), hook scripts (`hooks/`), and installer scripts (`scripts/`) must rely **strictly** on the Python standard library.
+   - Do not add packages to `dependencies` in `pyproject.toml` unless discussed and approved in an RFC issue.
+2. **Cross-Platform Portability**:
+   - Never use raw path strings with OS-specific slashes (`\` or `/`). Use `pathlib.Path` or `pathlib.PureWindowsPath` / `pathlib.PurePosixPath`.
+   - Every file read or write must explicitly pass `encoding="utf-8"`.
+3. **Reproduce Before Repair**:
+   - When submitting a bug fix, first formulate an automated test in `tests/` that demonstrates the failure.
+4. **Surgical Diff Principle**:
+   - Keep pull requests focused. Do not combine stylistic refactoring with functional changes.
+5. **Caller & Invariant Preservation**:
+   - Never break public API signatures in `core/` or weaken tests to force a build to pass.
+
+---
+
+## Pull Request Checklist
+
+Before opening a pull request, ensure:
+
+- [ ] All 44 tests pass locally: `python -m unittest discover tests` (exit code 0).
+- [ ] System integrity verifier passes: `python scripts/verify_harness.py`.
+- [ ] New functionality includes corresponding unit and/or integration tests.
+- [ ] Code follows standard library idioms and preserves type hints (`from __future__ import annotations`).
+- [ ] Documentation is updated if behavior or flags change.

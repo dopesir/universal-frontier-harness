@@ -15,8 +15,11 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-# Add project root to path for core imports
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Robust core import resolution (supports both root and .agents layouts)
+_here = Path(__file__).resolve().parent
+for _candidate in [_here.parent, _here.parent.parent]:
+    if (_candidate / "core").is_dir() and str(_candidate) not in sys.path:
+        sys.path.insert(0, str(_candidate))
 
 from core.evidence import append_evidence
 from core.fast_lint import lint_file
@@ -60,11 +63,13 @@ def record_failure(session_dir: Path, fingerprint: str, tool: str, error: str):
 
 
 def main():
-    try:
-        payload = json.load(sys.stdin)
-    except Exception:
-        print(json.dumps({}))
-        return
+    if sys.stdin.isatty():
+        payload = {}
+    else:
+        try:
+            payload = json.load(sys.stdin)
+        except Exception:
+            payload = {}
 
     tool_call = payload.get("toolCall", {})
     tool_name = tool_call.get("name", "")

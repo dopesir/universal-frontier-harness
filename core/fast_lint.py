@@ -21,6 +21,7 @@ class LintResult:
     errors: list[str]
     duration_ms: float
     file_type: str
+    validation_level: str  # "ast_parse", "full_json_parse", "delimiter_balance", "none"
 
 
 def check_delimiter_balance(source: str) -> list[str]:
@@ -113,7 +114,13 @@ def check_delimiter_balance(source: str) -> list[str]:
 
 
 def lint_file(file_path: str | Path) -> LintResult:
-    """Deterministically validates file syntax."""
+    """Deterministically validates file syntax with zero external dependencies.
+    
+    Validation levels:
+    - Python (.py): 'ast_parse' via standard library ast.parse.
+    - JSON (.json): 'full_json_parse' via standard library json.loads.
+    - JS/TS (.js, .ts, etc.): 'delimiter_balance' checking bracket/quote pairing.
+    """
     start = time.perf_counter()
     path = Path(file_path)
     if not path.is_file():
@@ -122,6 +129,7 @@ def lint_file(file_path: str | Path) -> LintResult:
             errors=[f"File not found: {file_path}"],
             duration_ms=(time.perf_counter() - start) * 1000,
             file_type="unknown",
+            validation_level="none",
         )
 
     ext = path.suffix.lower()
@@ -135,24 +143,30 @@ def lint_file(file_path: str | Path) -> LintResult:
             errors=[f"Failed to read file: {e}"],
             duration_ms=(time.perf_counter() - start) * 1000,
             file_type=ext,
+            validation_level="none",
         )
 
     file_type = ext.lstrip(".") or "txt"
+    validation_level = "delimiter_balance"
 
     if ext == ".py":
+        validation_level = "ast_parse"
         try:
             ast.parse(content, filename=str(path))
         except SyntaxError as e:
             errors.append(f"Python SyntaxError at line {e.lineno}, col {e.offset}: {e.msg}")
     elif ext == ".json":
+        validation_level = "full_json_parse"
         try:
             json.loads(content)
         except json.JSONDecodeError as e:
             errors.append(f"JSONDecodeError at line {e.lineno}, col {e.colno}: {e.msg}")
     elif ext in (".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"):
+        validation_level = "delimiter_balance"
         errors.extend(check_delimiter_balance(content))
     else:
         # Default delimiter check for general source code
+        validation_level = "delimiter_balance"
         errors.extend(check_delimiter_balance(content))
 
     duration_ms = (time.perf_counter() - start) * 1000
@@ -161,4 +175,5 @@ def lint_file(file_path: str | Path) -> LintResult:
         errors=errors,
         duration_ms=duration_ms,
         file_type=file_type,
+        validation_level=validation_level,
     )

@@ -29,15 +29,23 @@ class Contract:
 
 
 def load_contract(session_dir: str | Path) -> dict:
-    """Loads contract from session directory."""
+    """Loads contract from session directory.
+    
+    Returns:
+        dict: contract data if found, or empty dict if no contract file exists.
+    Raises:
+        ValueError: if contract file exists on disk but is corrupted or contains invalid JSON.
+    """
     path = Path(session_dir) / "contract.json"
     if not path.is_file():
         return {}
     try:
         with open(path, "r", encoding="utf-8", errors="replace") as f:
             return json.load(f)
-    except (OSError, json.JSONDecodeError):
-        return {}
+    except json.JSONDecodeError as e:
+        raise ValueError(f"Corrupted contract file '{path}': {e}") from e
+    except OSError as e:
+        raise ValueError(f"Inaccessible contract file '{path}': {e}") from e
 
 
 def save_contract(session_dir: str | Path, contract: Contract | dict) -> Path:

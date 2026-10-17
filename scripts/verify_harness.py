@@ -129,7 +129,7 @@ def main():
     print("\n5. Executable Unit Test Suite:")
     res = subprocess.run([sys.executable, "-m", "unittest", "discover", "tests"], cwd=str(ROOT))
     if res.returncode == 0:
-        print("  [PASS] All 16 unit tests passed cleanly (exit code 0)")
+        print("  [PASS] All test suite checks passed cleanly (exit code 0)")
     else:
         print(f"  [FAIL] Unit test suite failed with exit code {res.returncode}")
         all_passed = False

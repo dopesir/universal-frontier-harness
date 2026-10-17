@@ -13,8 +13,11 @@ import os
 import sys
 from pathlib import Path
 
-# Add project root to path for core imports
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+# Robust core import resolution (supports both root and .agents layouts)
+_here = Path(__file__).resolve().parent
+for _candidate in [_here.parent, _here.parent.parent]:
+    if (_candidate / "core").is_dir() and str(_candidate) not in sys.path:
+        sys.path.insert(0, str(_candidate))
 
 from core.contract import load_contract
 from core.policy import action_fingerprint, classify_action, evaluate_action
@@ -77,11 +80,13 @@ def load_failed_fingerprints(session_dir: Path) -> set[str]:
 
 
 def main():
-    try:
-        payload = json.load(sys.stdin)
-    except Exception:
-        print(json.dumps({"decision": "allow"}))
-        return
+    if sys.stdin.isatty():
+        payload = {}
+    else:
+        try:
+            payload = json.load(sys.stdin)
+        except Exception:
+            payload = {}
 
     tool_call = payload.get("toolCall", {})
     tool_name = tool_call.get("name", "")
