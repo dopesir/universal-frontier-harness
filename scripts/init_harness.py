@@ -154,6 +154,7 @@ def compute_install_plan(
         "constraints.md": "# Project Constraints\n\n- Do not modify files outside declared scope.\n- Preserve existing tests and comments.\n",
         "unresolved.md": "# Unresolved Issues\n\nNo unresolved issues recorded.\n",
         "verification.md": "# Verification Evidence Log\n\n| Date | Task ID | Validator | Result | Evidence File |\n| :--- | :--- | :--- | :--- | :--- |\n",
+        "experience.md": "# Harness² Continual Learning Library (experience.md)\n\n## 1. Universal Operational Heuristics\n\n## 2. Domain Knowledge\n\n## 3. Empirical Trajectory & Resolution Log\n",
     }
     for fname, _ in memory_templates.items():
         dst = memory_dir / fname
@@ -161,6 +162,21 @@ def compute_install_plan(
             plan.append(InstallPlanItem("skip", None, dst, "Existing memory file preserved"))
         else:
             plan.append(InstallPlanItem("create", None, dst, f"Initialize {fname} template"))
+
+    # 6. Supporting runtime scripts
+    scripts_dir = agents_dir / "scripts"
+    support_scripts = ["serve_preview.py", "harness_rsi.py", "verify_harness.py"]
+    for sname in support_scripts:
+        src = ROOT / "scripts" / sname
+        if src.exists():
+            dst = scripts_dir / sname
+            if dst.exists():
+                if overwrite:
+                    plan.append(InstallPlanItem("overwrite", src, dst, f"Overwrite supporting script {sname}"))
+                else:
+                    plan.append(InstallPlanItem("skip", src, dst, f"Existing supporting script {sname} preserved"))
+            else:
+                plan.append(InstallPlanItem("create", src, dst, f"Install supporting script {sname}"))
 
     # 6. Optional editor templates
     if include_cursor:
@@ -256,7 +272,7 @@ def init_project(
 
     # Ensure directories exist
     agents_dir = target / ".agents"
-    for d in (agents_dir / "rules", agents_dir / "hooks", agents_dir / "core", agents_dir / "memory"):
+    for d in (agents_dir / "rules", agents_dir / "hooks", agents_dir / "core", agents_dir / "memory", agents_dir / "scripts"):
         d.mkdir(parents=True, exist_ok=True)
 
     created_files: list[Path] = []
@@ -269,6 +285,7 @@ def init_project(
         "constraints.md": "# Project Constraints\n\n- Do not modify files outside declared scope.\n- Preserve existing tests and comments.\n",
         "unresolved.md": "# Unresolved Issues\n\nNo unresolved issues recorded.\n",
         "verification.md": "# Verification Evidence Log\n\n| Date | Task ID | Validator | Result | Evidence File |\n| :--- | :--- | :--- | :--- | :--- |\n",
+        "experience.md": "# Harness² Continual Learning Library (experience.md)\n\n## 1. Universal Operational Heuristics\n\n## 2. Domain Knowledge\n\n## 3. Empirical Trajectory & Resolution Log\n",
     }
 
     try:

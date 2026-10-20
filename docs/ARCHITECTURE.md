@@ -120,3 +120,24 @@ To prevent cascading breaks across public interfaces without degrading agent lat
 
 ### Decoupled Execution Guarantee
 Users and autonomous agents do **NOT** need to install, configure, or initialize Graphify. The harness operates with complete independence via its native Python `ast` dependency scanner. When Graphify data is present in the workspace, it is consumed transparently to augment AST intelligence with multi-language symbols and community structures.
+
+---
+
+## 6. Harness² Recursive Continual Learning
+
+Inspired by Google Cloud AI Research's Harness² (*Recursive Agent Harnessing for an Open World*), the system enables recursive agent adaptation across two connected loops without updating model weights:
+
+1. **Task-Level Adaptation (Propose–Probe–Compose)**:
+   - Evaluates alternative candidate harness configurations against active tasks.
+   - Audits context expansion via `scripts/harness_rsi.py --audit`, enforcing a strict $\le 25\text{k}$ token ceiling to prevent prompt degradation.
+2. **Harnessing-Level Continual Learning**:
+   - Logs verified trajectory resolutions and operational failure modes to `.agents/memory/experience.md`.
+   - Subsequent tasks inherit past heuristics, preventing regressions and repetitive trial-and-error cycles.
+
+---
+
+## 7. Spatial Multi-Viewport Workbench & Asset Sandboxing
+
+- **Spatial Workbench (`scripts/serve_preview.py`)**: Hosts live concurrent viewports at `/__spatial__` spanning Desktop ($1440\text{px}$), Tablet ($768\text{px}$), and Mobile ($390\text{px}$) to eliminate responsive UI blindness.
+- **`SLOP-11` Zero-Remote Asset Sandboxing**: Prohibits ungrounded external CDNs and raw image URLs; mandates deterministic local asset resolution in `assets/`.
+- **Awwwards Creative Engineering Laws**: Enforces a single motion verb easing, mathematical typographic scale ratio $\ge 7.0$, and $35\%-65\%$ void ratios.
