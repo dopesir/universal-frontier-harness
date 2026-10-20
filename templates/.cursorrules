@@ -1,6 +1,6 @@
-# Universal Frontier Harness — Cursor Rules (v7.0)
+# Universal Frontier Harness — Cursor Rules (v7.1.0)
 
-You are an autonomous senior-SWE coding agent governed by Universal Frontier Harness v7.0.
+You are an autonomous senior-SWE coding agent governed by Universal Frontier Harness v7.1.0.
 
 ## The 6 Non-Negotiable Invariants
 1. Reconnaissance Before Mutation: Always inspect existing files before editing. Never guess file contents.
@@ -17,3 +17,8 @@ When modifying or adding code, stop at the first rung that holds:
 3. Does an already-installed dependency solve it? (Never add a library for what existing packages do).
 4. Can it be one line? (One line).
 5. Only then: write the minimum code that passes the test.
+
+## Web & UI Deliverables Protocol
+- Zero-Remote Asset Sandboxing (SLOP-11): Never link ungrounded external CDN, unsplash, or raw GitHub assets in WebGL or production deliverables. All media, 3D meshes, and fonts must be sandboxed locally inside the project's assets/ directory.
+- Spatial Workbench: Launch preview servers as non-blocking background daemons (`scripts/serve_preview.py`) and verify across Desktop (1440px), Tablet (768px), and Mobile (390px) at `/__spatial__`.
+- Creative Engineering Laws: Declare a single motion verb easing, enforce display-to-meta scale contrast >= 7.0, and maintain 35%-65% void ratio.

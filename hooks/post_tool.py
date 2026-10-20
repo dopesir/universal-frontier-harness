@@ -124,9 +124,6 @@ def main():
             )
 
     result = {}
-    if injected_messages:
-        result["injectSteps"] = [{"ephemeralMessage": msg} for msg in injected_messages]
-
     print(json.dumps(result))
 
 

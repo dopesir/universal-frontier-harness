@@ -6,6 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.1.1] - 2026-10-20
+
+### Added
+- **Harness² Recursive Self-Improvement Engine (`scripts/harness_rsi.py`)**:
+  - Implements recursive harness adaptation inspired by Google Cloud AI Research's Harness² framework.
+  - Automated context bloat auditing (`--audit`) enforcing a strict $\le 25\text{k}$ token ceiling to eliminate prompt degradation.
+  - Trajectory and empirical continual learning recorder (`--log`) targeting `experience.md`.
+- **Spatial Multi-Viewport Workbench (`scripts/serve_preview.py`)**:
+  - Background HTTP preview daemon hosting a multi-viewport testing suite at `/__spatial__`.
+  - Concurrent live rendering across Desktop ($1440\text{px}$), Tablet ($768\text{px}$), and Mobile ($390\text{px}$) viewports.
+- **`SLOP-11` Zero-Remote Asset Sandboxing**:
+  - Codified into Section 4 of operational kernel rules.
+  - Prohibits ungrounded external CDN dependencies; mandates local sandboxing in `assets/`.
+- **Awwwards Creative Engineering Laws**:
+  - Added formal constraints: Single Motion Verb easing (`cubic-bezier(0.16, 1, 0.3, 1)`), extreme typographic scale contrast ratio ($\ge 7.0$), and negative space void ratio ($35\% - 65\%$).
+
+### Changed
+- **Delimiter Linting Resilience (`core/fast_lint.py`)**:
+  - Exempted markup and documentation formats (`.md`, `.txt`, `.rst`, `.html`, `.svg`, `.xml`) from delimiter checks to prevent false syntax flags.
+
+---
+
 ## [7.1.0] - 2026-10-17
 
 ### Added

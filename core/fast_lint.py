@@ -164,6 +164,8 @@ def lint_file(file_path: str | Path) -> LintResult:
     elif ext in (".js", ".jsx", ".ts", ".tsx", ".mjs", ".cjs"):
         validation_level = "delimiter_balance"
         errors.extend(check_delimiter_balance(content))
+    elif ext in (".md", ".markdown", ".txt", ".rst", ".html", ".svg", ".xml"):
+        validation_level = "none"
     else:
         # Default delimiter check for general source code
         validation_level = "delimiter_balance"

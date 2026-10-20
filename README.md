@@ -1,6 +1,6 @@
-# Universal Frontier Harness (v7.1.0)
+# Universal Frontier Harness (v7.1.1)
 
-[![Version: 7.1.0](https://img.shields.io/badge/version-7.1.0-blue.svg)](CHANGELOG.md)
+[![Version: 7.1.1](https://img.shields.io/badge/version-7.1.1-blue.svg)](CHANGELOG.md)
 [![CI](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml/badge.svg)](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml)
 [![Tests: 50 Passing](https://img.shields.io/badge/tests-50%2F50%20passing-brightgreen.svg)](tests/)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -115,6 +115,26 @@ The harness features an ultra-lean, zero-dependency dependency graph and blast-r
    python -m core.graph_intel blast-radius core/policy.py
    python -m core.graph_intel dependents core/policy.py
    ```
+
+---
+
+## Harness² Recursive Self-Improvement & Spatial Workbench
+
+### 1. Harness² Continual Learning Architecture
+Inspired by Google Cloud AI Research's Harness² (*Recursive Agent Harnessing for an Open World*), the framework operates on frozen model weights while recursively optimizing execution scaffolding:
+- **`scripts/harness_rsi.py --audit`**: Inspects the entire active harness footprint across rules, memory, and skills, enforcing a hard context limit ($\le 25\text{k}$ tokens) to prevent prompt degradation.
+- **`scripts/harness_rsi.py --log`**: Appends empirical execution lessons, observed failure modes, and verified fixes into a persistent continual learning repository (`.agents/memory/experience.md`).
+
+### 2. Spatial Multi-Viewport Workbench
+To eliminate mobile and responsive design blindness, the included HTTP daemon provides live multi-device simulation:
+```bash
+python scripts/serve_preview.py /path/to/project --port 5185
+```
+- Standard application view: `http://localhost:5185`
+- Spatial multi-viewport workbench: `http://localhost:5185/__spatial__` (renders Desktop $1440\text{px}$, Tablet $768\text{px}$, and Mobile $390\text{px}$ concurrently in real time).
+
+### 3. Zero-Remote Asset Sandboxing (`SLOP-11`)
+Section 4 enforces local caching for all fonts, 3D meshes, textures, and media inside `assets/`. Deliverables relying on raw external CDNs or Unsplash URLs fail closed.
 
 ---
 

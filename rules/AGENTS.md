@@ -40,7 +40,12 @@ When modifying or adding code, stop at the first rung that holds:
 - **A Directory Path is NOT a Website**: Never output raw filesystem paths (`file:///C:/path`) as a deliverable link.
 - **Mandatory Live Delivery Channels**:
   1. *For Prototypes & Static UIs*: Create a standalone HTML Artifact rendered in the IDE webview pane.
-  2. *For Bundled Projects (Vite, Next.js, Node, Python)*: Launch as a non-blocking background daemon (`scripts/serve_preview.py`) and provide a clickable `🌐 [Open Web Application (http://localhost:PORT)](http://localhost:PORT)`.
+  2. *For Bundled Projects (Vite, Next.js, Node, Python)*: Launch as a non-blocking background daemon (`scripts/serve_preview.py`) and provide clickable links for both the solo deliverable `🌐 [Open Web Application (http://localhost:PORT)](http://localhost:PORT)` and the multi-viewport spatial testbed `🌐 [Open Spatial Workbench (http://localhost:PORT/__spatial__)](http://localhost:PORT/__spatial__)`.
+- **Zero-Remote Asset Sandboxing (`SLOP-11`)**: Never link ungrounded external CDN, unsplash, or raw GitHub assets in WebGL or production deliverables. All media, 3D meshes, and fonts must be sandboxed locally inside the project's `assets/` directory to prevent CORS blocking, rate limits, or network failures.
+- **Awwwards Creative Engineering Laws (The Juliobsz Grammar)**:
+  1. *Single Motion Verb*: Declare and adhere to one unified physics easing curve (e.g. `cubic-bezier(0.16, 1, 0.3, 1)`) across all transitions, hover states, and camera tilts.
+  2. *Extreme Scale Contrast Ratio*: Display headlines must contrast against secondary/mono meta tags at a mathematical scale ratio $\ge 7.0$ (typically $9.0 - 11.0$).
+  3. *Void Ratio Discipline*: Maintain negative space / void ratio between $35\% - 65\%$; avoid edge-to-edge card clutter.
 
 ---
 
