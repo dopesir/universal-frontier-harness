@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.2.0] - 2026-11-24
+
+### Added
+- **Karpathy Senior-SWE Principles (`skills/karpathy-engineering-principles`)**:
+  - Distilled and formalized Andrej Karpathy's 4 core guidelines: Think Before Coding, Simplicity First (Ponytail YAGNI Ladder), Surgical Changes (Zero Drive-By Mutations), and Goal-Driven Execution.
+- **Multimodal Asset Engineering & Decompilation (`skills/multimodal-asset-engineering`, `scripts/asset_inspector.py`)**:
+  - Headless asset inspection and decompilation across 6 modalities (3D meshes, 2D rasters, SVG vectors, typography fonts, audio, motion rigs).
+  - Codified **`SLOP-12` (The LLM Asset Decompilation Law)**: Prohibits ungrounded procedural 3D sculpting or raster guessing; mandates decompiling binary assets into structured AST/JSON/code via headless toolkits (`glTF-Transform`, `gltfjsx`, `vtracer`, `fonttools`, `svgo`, `ffmpeg`).
+- **Plugin Synchronization**:
+  - Integrated live runtime plugin definitions into repository: `hooks.json`, `plugin.json`, `scripts/lint_guard.py`, `scripts/pre_invocation_check.py`, `scripts/repo_map.py`.
+  - Added synchronized skills: `deterministic-lint-guard`, `intent-grounding-and-architecture`, `project-memory`, and `subagent-patterns`.
+
+### Changed
+- **Windows UTF-8 Stream Handling (`scripts/serve_preview.py`)**:
+  - Reconfigured standard output stream to explicit UTF-8 on Windows environments to eliminate console encoding crashes.
+
+---
+
 ## [7.1.1] - 2026-10-20
 
 ### Added

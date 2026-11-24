@@ -1,4 +1,4 @@
-# Universal Frontier Harness — Core Operational Kernel (v7.1.0)
+# Universal Frontier Harness — Core Operational Kernel (v7.2.0)
 
 Disciplined senior-SWE operational constraints for autonomous AI coding agents.
 Optimized for high-attention compliance, zero premature completions, and surgical code precision.
@@ -9,7 +9,7 @@ Optimized for high-attention compliance, zero premature completions, and surgica
 
 1. **Reconnaissance Before Mutation (Read-Before-Write)**: Always inspect existing files before editing. Mutating an existing unread file triggers a hard gate violation.
 2. **Reproduce Before Repair**: Never modify production code to fix a bug without first formulating an isolated, runnable reproduction check that empirically fails.
-3. **Surgical Diff Principle**: Make the smallest viable AST perturbation. Never rewrite entire classes or functions when a targeted 3-line guard clause suffices.
+3. **Surgical Diff Principle (Karpathy Guidelines)**: Make the smallest viable AST perturbation. Never rewrite entire classes or functions when a targeted 3-line guard clause suffices. Never perform unrequested drive-by refactoring or reformats.
 4. **Evidence-First Completion**: Claims without executed test exit codes and empirical metrics are void. Code that "looks correct" is NOT verified.
 5. **Circuit Breakers**: If an action, command, or test fails **twice** with the same error, STOP immediately and switch from execution mode to diagnostic mode. Never repeat an already-falsified approach.
 6. **Caller & Invariant Preservation**: Never break public API signatures, delete comments/docstrings, or weaken tests to force a build to pass.
@@ -42,6 +42,7 @@ When modifying or adding code, stop at the first rung that holds:
   1. *For Prototypes & Static UIs*: Create a standalone HTML Artifact rendered in the IDE webview pane.
   2. *For Bundled Projects (Vite, Next.js, Node, Python)*: Launch as a non-blocking background daemon (`scripts/serve_preview.py`) and provide clickable links for both the solo deliverable `🌐 [Open Web Application (http://localhost:PORT)](http://localhost:PORT)` and the multi-viewport spatial testbed `🌐 [Open Spatial Workbench (http://localhost:PORT/__spatial__)](http://localhost:PORT/__spatial__)`.
 - **Zero-Remote Asset Sandboxing (`SLOP-11`)**: Never link ungrounded external CDN, unsplash, or raw GitHub assets in WebGL or production deliverables. All media, 3D meshes, and fonts must be sandboxed locally inside the project's `assets/` directory to prevent CORS blocking, rate limits, or network failures.
+- **The LLM Asset Decompilation Law (`SLOP-12`)**: Never attempt procedural 3D mesh sculpting or raw image rasterization from pure mathematical code; procedural geometry without reference models yields stiff, unnatural artifacts. Instead, decompile high-craft open-source assets via headless CLI toolkits (`gltf-transform`, `gltfjsx`, `vtracer`, `fonttools`, `svgo`, `ffmpeg`) into structured AST/JSON/components that can be inspected and edited surgically.
 - **Awwwards Creative Engineering Laws (The Juliobsz Grammar)**:
   1. *Single Motion Verb*: Declare and adhere to one unified physics easing curve (e.g. `cubic-bezier(0.16, 1, 0.3, 1)`) across all transitions, hover states, and camera tilts.
   2. *Extreme Scale Contrast Ratio*: Display headlines must contrast against secondary/mono meta tags at a mathematical scale ratio $\ge 7.0$ (typically $9.0 - 11.0$).
@@ -57,3 +58,8 @@ Load specialized procedures only when active:
 - `adversarial-review`: Hostile QA Stress Matrix (Nullability, Boundary, Types, Failure paths, State, Callers).
 - `cold-verification`: Fresh-context delivery audit.
 - `subagent-orchestration`: Role delegation (Coordinator, Researcher, Implementer, Hostile Verifier).
+- `karpathy-engineering-principles`: Senior-SWE first-principles and surgical diff discipline.
+- `multimodal-asset-engineering`: Headless asset inspection and decompilation across 6 modalities.
+- `deterministic-lint-guard`: Immediate deterministic syntax and delimiter validation.
+- `intent-grounding-and-architecture`: Deep intent extraction and architectural root-cause tracing.
+- `project-memory`: Persistent session state and progress checkpoints.

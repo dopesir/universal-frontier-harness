@@ -20,6 +20,13 @@ import threading
 import time
 import urllib.request
 
+if sys.platform == "win32" and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
+
 
 def generate_spatial_html(port: int, title: str = "DELIVERABLE PREVIEW") -> str:
     """Generates the self-contained Spatial Multi-Viewport Workbench."""
