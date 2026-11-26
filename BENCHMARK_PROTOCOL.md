@@ -20,7 +20,7 @@ Every trial evaluates identical task instances under strictly controlled conditi
 
 | Parameter | Configuration A: Baseline (Vanilla Host) | Configuration B: Harness Enabled (v7.0) |
 | :--- | :--- | :--- |
-| **Model** | Frozen Model ID (e.g. `claude-3-5-sonnet-20241022`), `temp=0.0` | Identical Model ID, `temp=0.0` |
+| **Model** | Frozen Model ID (e.g. `claude-3-5-sonnet` or latest evaluated checkpoint), `temp=0.0` | Identical Model ID, `temp=0.0` |
 | **Workspace Snapshot** | Clean git checkout at tagged commit | Identical git checkout at tagged commit |
 | **Rules Configuration** | Standard system prompt only | Standard prompt + `.agents/rules/AGENTS.md` |
 | **Active Hooks** | None | `pre_tool.py`, `post_tool.py`, `stop_gate.py` |

@@ -1,8 +1,8 @@
-# Universal Frontier Harness (v7.1.1)
+# Universal Frontier Harness (v7.2.0)
 
-[![Version: 7.1.1](https://img.shields.io/badge/version-7.1.1-blue.svg)](CHANGELOG.md)
+[![Version: 7.2.0](https://img.shields.io/badge/version-7.2.0-blue.svg)](CHANGELOG.md)
 [![CI](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml/badge.svg)](https://github.com/dopesir/universal-frontier-harness/actions/workflows/test.yml)
-[![Tests: 50 Passing](https://img.shields.io/badge/tests-50%2F50%20passing-brightgreen.svg)](tests/)
+[![Tests: 52 Passing](https://img.shields.io/badge/tests-52%2F52%20passing-brightgreen.svg)](tests/)
 [![Python: 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Dependencies: Zero](https://img.shields.io/badge/dependencies-zero-brightgreen.svg)](#zero-dependencies)
@@ -162,7 +162,7 @@ python scripts/init_harness.py /path/to/your/project
   ```
 
 ### Verify System Health
-Run the self-test suite (50 automated unit, integration, and adversarial tests):
+Run the self-test suite (52 automated unit, integration, and adversarial tests):
 ```bash
 python -m unittest discover tests
 python scripts/verify_harness.py

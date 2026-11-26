@@ -12,7 +12,7 @@ This document details the verified compatibility status of the Universal Frontie
 | **macOS (Apple Silicon & Intel)** | :white_check_mark: Verified | :white_check_mark: Verified | :white_check_mark: Verified | :white_check_mark: Verified | [Active CI Matrix](https://github.com/dopesir/universal-frontier-harness/actions) |
 | **Windows 11 / 10** | :white_check_mark: Verified | :white_check_mark: Verified | :white_check_mark: Verified | :white_check_mark: Verified | [Active CI Matrix](https://github.com/dopesir/universal-frontier-harness/actions) |
 
-All 50 automated tests execute identically across Windows, macOS, and Linux.
+All 52 automated tests execute identically across Windows, macOS, and Linux.
 
 ---
 

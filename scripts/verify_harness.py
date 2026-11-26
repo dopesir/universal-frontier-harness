@@ -100,7 +100,7 @@ def verify_plugin(plugin_dir, is_global=False):
     else:
         passed = False
 
-    # Skills catalog (9 skills)
+    # Skills catalog (11 skills)
     print("\n  Skills Catalog:")
     skills_dir = os.path.join(plugin_dir, "skills")
     required_skills = [
@@ -110,6 +110,8 @@ def verify_plugin(plugin_dir, is_global=False):
         "deterministic-lint-guard",
         "engineering-recon",
         "intent-grounding-and-architecture",
+        "karpathy-engineering-principles",
+        "multimodal-asset-engineering",
         "project-memory",
         "repro-first-debugging",
         "subagent-patterns"
@@ -147,7 +149,7 @@ def verify_plugin(plugin_dir, is_global=False):
 
     # Supporting scripts
     print("\n  Supporting Scripts:")
-    for script_name in ["pre_invocation_check.py", "repo_map.py", "lint_guard.py", "serve_preview.py", "harness_rsi.py"]:
+    for script_name in ["pre_invocation_check.py", "repo_map.py", "lint_guard.py", "serve_preview.py", "harness_rsi.py", "asset_inspector.py"]:
         script_path = os.path.join(plugin_dir, "scripts", script_name)
         if not check_file_exists(script_path, script_name):
             passed = False
@@ -157,10 +159,10 @@ def verify_plugin(plugin_dir, is_global=False):
 
 def main():
     if "--version" in sys.argv:
-        print("Universal Frontier Harness v6.2.0")
+        print("Universal Frontier Harness v7.2.0")
         sys.exit(0)
 
-    print("=== Universal Frontier Harness v6.2 Health & Integrity Check ===")
+    print("=== Universal Frontier Harness v7.2.0 Health & Integrity Check ===")
     
     check_mode = "all" if "--all" in sys.argv else ("global" if "--global" in sys.argv else "auto")
     global_plugin_dir = os.path.expanduser(r"~\.gemini\config\plugins\universal-harness")
